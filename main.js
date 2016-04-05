@@ -4,7 +4,7 @@ var fc = '';
 var tc = '';
 var $date = $('#db');
 
-function getCoordonates(address) {
+function getCoordinates(address) {
   return jQuery.getJSON('https://maps.googleapis.com/maps/api/geocode/json', {
     address: address
   });
@@ -91,14 +91,14 @@ function go() {
   tc = '';
   var fcc = $('#fc').val();
   var tcc = $('#tc').val();
-  getCoordonates(fcc).then(function(data) {
+  getCoordinates(fcc).then(function(data) {
       if (data.results.length > 0) {
         var loc = data.results[0].geometry.location;
         fc = encodeURIComponent([loc.lat, loc.lng].join('|'));
         console.log('fc', fc);
       }
     })
-    .then(getCoordonates.bind(window, tcc))
+    .then(getCoordinates.bind(window, tcc))
     .then(function(data) {
       if (data.results.length > 0) {
         var loc = data.results[0].geometry.location;
